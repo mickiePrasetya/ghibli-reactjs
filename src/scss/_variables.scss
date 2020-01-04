@@ -1,0 +1,83 @@
+// ***********************************
+// VARIABLES
+// ***********************************
+
+// FONT-FACE USING MIXIN.SCSS
+@include font-face(
+	roboto-bold,
+	"/assets/fonts/roboto-bold-webfont",
+	"normal",
+	"normal",
+	woff2 woff
+);
+
+@include font-face(
+	roboto-regular,
+	"/assets/fonts/roboto-regular-webfont",
+	"normal",
+	"normal",
+	woff2 woff
+);
+
+@include font-face(
+	poppins-bold,
+	"/assets/fonts/poppins-bold-webfont",
+	"normal",
+	"normal",
+	woff2 woff
+);
+
+@include font-face(
+	poppins-regular,
+	"/assets/fonts/poppins-regular-webfont",
+	"normal",
+	"normal",
+	woff2 woff
+);
+
+@include font-face(
+	roboto-light,
+	"/assets/fonts/roboto-light-webfont",
+	"normal",
+	"normal",
+	woff2 woff
+);
+
+$context: 24;
+
+// LAYOUT
+$mini: 320px;
+$small: 576px;
+$medium: 768px;
+$large: 992px;
+$xlarge: 1200px;
+$xxlarge: 1600px;
+
+$max-small: 575.98px;
+$max-medium: 767.98px;
+$max-large: 991.98px;
+$max-xlarge: 1199.98px;
+$max-xxlarge: 1599.98px;
+
+$max-height800: 799.98px;
+
+// TYPOGRAPHY
+$font-family-heading: poppins-bold, "Segoe UI", Arial, sans-serif;
+$font-family-heading-alt: poppins-regular, "Segoe UI", Arial, sans-serif;
+$font-family-bold: roboto-bold, "Segoe UI", Arial, sans-serif;
+$font-family-base: roboto-regular, "Segoe UI", Arial, sans-serif;
+$font-family-light: roboto-light, "Segoe UI", Arial, sans-serif;
+$font-family-condensed-bold: roboto-cond-bold, "Segoe UI", Arial, sans-serif;
+$font-family-condensed-reg: roboto-cond-reg, "Segoe UI", Arial, sans-serif;
+
+// COLORS
+$blue1: #013375;
+$blue2: #27aae1;
+$red: #ce181e;
+
+$grey: #4c5066;
+$greylight: #8f95b7;
+$greylighter: #f8f9fe;
+
+// Color Gradient
+// $gradient-primary: linear-gradient(-45deg, $color-third, $color-secondary);
