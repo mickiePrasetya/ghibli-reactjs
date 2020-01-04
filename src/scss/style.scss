@@ -1,0 +1,72 @@
+@import "mixin";
+@import "functions";
+@import "variables";
+
+body {
+	background: white;
+	color: #333;
+	font-family: $font-family-base;
+	font-size: rem(15);
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+a,
+.btn-link {
+	color: #003375;
+}
+
+a:hover {
+	color: #003375;
+	text-decoration: underline;
+}
+
+.btn {
+	display: inline-flex;
+	justify-content: center;
+	align-items: center;
+	padding-left: 24px;
+	padding-right: 24px;
+
+	&__icon {
+		height: 15px;
+		width: 15px;
+		margin-right: 6px;
+	}
+}
+
+.table thead th {
+	padding: 15px 10px 0;
+}
+
+.filter-label {
+	margin-top: 8px;
+	margin-bottom: 0;
+
+	.form-control {
+		border-radius: 0;
+		border: 0;
+		width: calc(100% + 18px);
+		margin-left: -10px;
+		border-top: 1px solid #e1e1e1;
+	}
+}
+
+.label {
+	text-align: center;
+	padding: 15px 30px 15px;
+
+	&__link {
+		text-decoration: none;
+	}
+
+	&__num {
+		font-size: 2.5rem;
+		font-family: $font-family-light;
+	}
+
+	&__text {
+		font-size: 0.8rem;
+		color: #777;
+	}
+}
