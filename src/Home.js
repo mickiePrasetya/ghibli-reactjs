@@ -1,36 +1,48 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { connect } from "react-redux";
 import { Button } from "react-bootstrap";
-import { User, X, ArrowRight } from "react-feather";
+import { ArrowRight } from "react-feather";
+import axios from "axios";
+
+// ACTIONS
+import { loadFilms } from "./actions/filmActions";
+
+// Partials
+import Header from "./partials/Header";
+import DefaultFooter from "./partials/DefaultFooter";
 
 class Home extends Component {
+	state = {
+		slides_list: [],
+		selected_slide: {}
+	};
+
+	source = axios.CancelToken.source();
+
+	componentDidMount() {
+		this.props.loadFilms(this.source.token);
+	}
+
+	componentDidUpdate(prevProps, prevState) {
+		if (prevProps.films !== this.props.films) {
+			if (this.props.films.data.length) {
+				this.setState({
+					...this.state,
+					slides_list: this.props.films.data.slice(0, 6)
+				});
+			}
+		}
+	}
+
 	render() {
+		const { slides_list } = this.state;
+		const slideLength = slides_list.length;
+
+		console.log(slideLength);
+
 		return (
 			<React.Fragment>
-				<header className="header">
-					<div className="brand">
-						<img
-							className="brand__logo"
-							src="/assets/images/img-logo.png"
-							alt="Ghibli Studio"
-						/>
-					</div>
-					<nav>
-						<ul className="navlist">
-							<li>
-								<Link to="/films">Films</Link>
-							</li>
-							<li>
-								<Button
-									onClick={() => console.log("test")}
-									variant="link"
-								>
-									Characters
-								</Button>
-							</li>
-						</ul>
-					</nav>
-				</header>
+				<Header />
 				<div className="slides">
 					<div
 						className="slides__wrapper"
@@ -80,46 +92,14 @@ class Home extends Component {
 						alt="ornament website"
 					/>
 				</div>
-				<footer className="footer">
-					<p className="footer__text">
-						All images are copyright to respective owners and protected
-						under international copyright laws.
-					</p>
-					<p className="footer__copy">
-						&copy; 2019. Mickie Prasetya. Made by love
-					</p>
-				</footer>
-				<div className="sidebar">
-					<div className="sidebar__header">
-						<h5 className="sidebar__title">Characters</h5>
-						<Button className="sidebar__close" variant="link">
-							<X className="icon" />
-						</Button>
-					</div>
-					<div className="sidebar__content">
-						<div className="sidebar__item">
-							<div className="sidebar__box">
-								<User className="icon" />
-							</div>
-							<div className="sidebar__text">
-								<p className="sidebar__character">Ashitaka</p>
-								<span className="sidebar__gender">Male</span>
-							</div>
-						</div>
-						<div className="sidebar__item">
-							<div className="sidebar__box">
-								<User className="icon" />
-							</div>
-							<div className="sidebar__text">
-								<p className="sidebar__character">Ran</p>
-								<span className="sidebar__gender">Female</span>
-							</div>
-						</div>
-					</div>
-				</div>
+				<DefaultFooter />
 			</React.Fragment>
 		);
 	}
 }
 
-export default Home;
+const mapStateToProps = state => ({
+	films: state.films
+});
+
+export default connect(mapStateToProps, { loadFilms })(Home);

@@ -2,6 +2,10 @@
 @import "functions";
 @import "variables";
 
+html {
+	height: 100%;
+}
+
 body {
 	background: white;
 	color: #333;
@@ -9,6 +13,11 @@ body {
 	font-size: rem(15);
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
+	height: 100%;
+
+	&.body--locked {
+		overflow-y: hidden;
+	}
 }
 
 .header {
@@ -282,12 +291,92 @@ body {
 	}
 }
 
+.content {
+	&__header {
+		@extend .slides__wrapper;
+		min-height: 400px;
+
+		&:after {
+			height: 200px;
+		}
+	}
+
+	&__body {
+		padding: 30px 0;
+	}
+
+	&__title {
+		margin: 0;
+		font-weight: normal;
+		font-family: $font-family-heading;
+		color: black;
+		text-align: center;
+		font-size: rem(30);
+	}
+}
+
+.lists {
+	padding: 32px 0;
+	display: flex;
+	flex-flow: row wrap;
+
+	&__item {
+		width: 25%;
+		padding: 0 8px 16px;
+
+		@include max-large {
+			width: 33.333%;
+		}
+
+		@include max-medium {
+			width: 50%;
+		}
+
+		@include max-small {
+			width: 100%;
+		}
+	}
+
+	&__wrapper {
+		background: white;
+		border-radius: 10px;
+		box-shadow: 0px 5px 15px rgba(#59a0bd, 0.3);
+		padding: 32px;
+		height: 100%;
+	}
+
+	&__title {
+		font-family: $font-family-bold;
+		font-weight: normal;
+		font-size: rem(20);
+		margin: 0;
+		margin-bottom: 8px;
+	}
+
+	&__detail {
+		p {
+			margin: 0;
+			font-size: rem(13);
+			color: #999;
+		}
+
+		span {
+			color: black;
+		}
+	}
+}
+
 .footer {
 	padding: 48px 16px;
+	text-align: center;
+
+	&__image {
+		margin-bottom: 16px;
+		display: inline-block;
+	}
 
 	&__text,
 	&__copy {
-		text-align: center;
 		font-size: rem(12);
 		margin-bottom: 6px;
 		color: #999;
@@ -297,6 +386,7 @@ body {
 .sidebar {
 	position: fixed;
 	transform: translateX(410px);
+	transition: transform 250ms ease-in;
 	top: 0;
 	right: 0;
 	z-index: 50;
@@ -304,6 +394,11 @@ body {
 	height: 100%;
 	background: url("/assets/images/img-bg-sidebar.png") center 87% no-repeat
 		#eeefe8;
+
+	&.is--open {
+		transform: translateX(0);
+		transition: transform 250ms ease-in;
+	}
 
 	&__header {
 		display: flex;
@@ -314,6 +409,8 @@ body {
 
 	&__content {
 		padding: 16px;
+		height: calc(100% - 62px);
+		overflow-y: auto;
 	}
 
 	&__title {

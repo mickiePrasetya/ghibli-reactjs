@@ -1,3 +1,5 @@
+import { LOAD_FILMS } from "../actions/filmActions";
+
 const initialState = {
 	data: [],
 	banner_data: []
@@ -5,7 +7,7 @@ const initialState = {
 
 export default (state = initialState, action) => {
 	switch (action.type) {
-		case "LOAD_FILM":
+		case LOAD_FILMS:
 			return {
 				...state,
 				data: action.payload

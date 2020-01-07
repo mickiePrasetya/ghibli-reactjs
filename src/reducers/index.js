@@ -3,7 +3,7 @@ import filmReducer from "./filmReducer";
 import peopleReducer from "./peopleReducer";
 
 const rootReducer = combineReducers({
-	film: filmReducer,
+	films: filmReducer,
 	people: peopleReducer
 });
 
