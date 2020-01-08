@@ -14,7 +14,7 @@ import DefaultFooter from "./partials/DefaultFooter";
 class Home extends Component {
 	state = {
 		slides_list: [],
-		selected_slide: {}
+		current_slide: 0
 	};
 
 	source = axios.CancelToken.source();
@@ -35,41 +35,54 @@ class Home extends Component {
 	}
 
 	render() {
-		const { slides_list } = this.state;
+		const { slides_list, current_slide } = this.state;
 		const slideLength = slides_list.length;
 
-		console.log(slideLength);
+		const nextSlide = () => {
+			if (current_slide < slideLength - 1) {
+				return this.setState({
+					...this.state,
+					current_slide: this.state.current_slide + 1
+				});
+			} else {
+				return this.setState({
+					...this.state,
+					current_slide: 0
+				});
+			}
+		};
 
-		return (
-			<React.Fragment>
-				<Header />
-				<div className="slides">
+		const slideShow = currIndex => {
+			if (slides_list.length) {
+				return (
 					<div
 						className="slides__wrapper"
 						style={{
-							backgroundImage: 'url("/assets/images/img-bg-3.jpg")'
+							backgroundImage: `url("/assets/images/img-bg-${slides_list[currIndex].id}.jpg")`
 						}}
 					>
 						<div className="slides__content">
-							<div className="slides__title">My Neighbor Totoro</div>
+							<div className="slides__title">
+								{slides_list[currIndex].title}
+							</div>
 							<div className="slides__text">
-								<p>
-									Two sisters move to the country with their father in
-									order to be closer to their hospitalized mother, and
-									discover the surrounding trees are inhabited by
-									Totoros, magical spirits of the forest. When the
-									youngest runs away from home, the older sister seeks
-									help from the spirits to find her.
-								</p>
+								<p>{slides_list[currIndex].description}</p>
 								<p className="slides__score">
-									score: <span>9.3</span> /100
+									score: <span>{slides_list[currIndex].rt_score}</span>
+									/100
 								</p>
 							</div>
 						</div>
 						<div className="slides__thumbnail">
 							<div className="slides__thumb">
 								<img
-									src="/assets/images/img-thumbnail-1.jpg"
+									src={
+										currIndex < slides_list.length - 1
+											? `/assets/images/img-thumb-${
+													slides_list[currIndex + 1].id
+											  }.jpg`
+											: `/assets/images/img-thumb-${slides_list[0].id}.jpg`
+									}
 									alt="thumbnail slide"
 								/>
 							</div>
@@ -77,14 +90,21 @@ class Home extends Component {
 								<Button
 									variant="link"
 									className="slides__btn"
-									onClick={() => console.log("clicked!")}
+									onClick={nextSlide}
 								>
 									<ArrowRight className="icon" />
 								</Button>
 							</div>
 						</div>
 					</div>
-				</div>
+				);
+			}
+		};
+
+		return (
+			<React.Fragment>
+				<Header />
+				<div className="slides">{slideShow(current_slide)}</div>
 				<div className="ornament">
 					<img
 						className="ornament__img"

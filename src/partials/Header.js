@@ -15,10 +15,23 @@ class Header extends Component {
 		isOpen: false
 	};
 
+	headerRef = React.createRef();
 	source = axios.CancelToken.source();
 
 	componentDidMount() {
 		this.props.loadPeople(this.source.token);
+
+		// window scroll
+		window.onscroll = () => {
+			if (
+				document.body.scrollTop > 100 ||
+				document.documentElement.scrollTop > 100
+			) {
+				this.headerRef.current.classList.add("header--slideup");
+			} else {
+				this.headerRef.current.classList.remove("header--slideup");
+			}
+		};
 	}
 
 	componentDidUpdate(prevProps, prevState) {
@@ -38,7 +51,7 @@ class Header extends Component {
 	render() {
 		return (
 			<React.Fragment>
-				<header className="header">
+				<header className="header" ref={this.headerRef}>
 					<div className="brand">
 						<Link to="/">
 							<img

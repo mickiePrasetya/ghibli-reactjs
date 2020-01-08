@@ -28,7 +28,8 @@ class Films extends Component {
 					<div
 						className="content__header"
 						style={{
-							backgroundImage: 'url("/assets/images/img-bg-3.jpg")'
+							backgroundImage:
+								'url("/assets/images/img-bg-2baf70d1-42bb-4437-b551-e5fed5a87abe.jpg")'
 						}}
 					></div>
 					<div className="content__body">

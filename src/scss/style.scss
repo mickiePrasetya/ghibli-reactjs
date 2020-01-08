@@ -29,6 +29,12 @@ body {
 	left: 0;
 	width: 100%;
 	z-index: 10;
+	transition: transform 150ms ease-in;
+
+	&.header--slideup {
+		transform: translateY(-90px);
+		transition: transform 250ms ease-in;
+	}
 }
 
 .navlist {
@@ -130,7 +136,7 @@ body {
 	&__wrapper {
 		position: relative;
 		min-height: 740px;
-		background: greenyellow;
+		background: #cfe6c2;
 		background-size: cover;
 		background-repeat: no-repeat;
 		background-position: center top;
