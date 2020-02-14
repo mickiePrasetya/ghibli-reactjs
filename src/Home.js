@@ -81,7 +81,7 @@ class Home extends Component {
 											? `/assets/images/img-thumb-${
 													slides_list[currIndex + 1].id
 											  }.jpg`
-											: `/assets/images/img-thumb-${slides_list[0].id}.jpg`
+											: `/assets/images/img-thumb-${slides_list["0"].id}.jpg`
 									}
 									alt="thumbnail slide"
 								/>
